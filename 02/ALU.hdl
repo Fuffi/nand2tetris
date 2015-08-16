@@ -58,5 +58,12 @@ CHIP ALU {
    Mux16(a=internalAnd, b=internalAdd, out=internalResult, sel=f);
 
    Not16(in=internalResult, out=notInternalResult);
-   Mux16(a=internalResult, b=notInternalResult, out=out, sel=no);
+   Mux16(a=internalResult, b=notInternalResult, out=out, out[0..7]=out0to7, out[8..15]=out8to16, out[15]=out15, sel=no);
+
+   Or8Way(in=out0to7, out=zrTemp1);
+   Or8Way(in=out8to16, out=zrTemp2);
+   Or(a=zrTemp1, b=zrTemp2, out=notZr);
+   Not(in=notZr, out=zr);
+
+   And(a=out15, b[0]=true, out=ng);
 }
