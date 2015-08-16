@@ -17,4 +17,8 @@ CHIP PC {
 
     PARTS:
     // Put your code here:
+    Or8Way(in[0]=load, in[1]=reset, in[2]=inc, out=shouldLoad);
+    Inc16(in=previousValue, out=incrementedValue);
+    Mux8Way16(b=in, c=incrementedValue, d=in, e=false, f=false, g=false, h=false, sel[0]=load, sel[1]=inc, sel[2]=reset, out=setValue);
+    Register(in=setValue, load=shouldLoad, out=out, out=previousValue);
 }
