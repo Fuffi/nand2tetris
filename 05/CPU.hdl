@@ -48,7 +48,7 @@ CHIP CPU {
     And(a=instruction[5], b=instruction[15], out=isALUStoringInA);
     Or(a=isAInstruction, b=isALUStoringInA, out=shouldLoadA);
 
-    Register(in=muxIntoA, out=aIntoMux, out=aIntoPC, out[0..14]=addressM, load=shouldLoadA);
+    ARegister(in=muxIntoA, out=aIntoMux, out=aIntoPC, out[0..14]=addressM, load=shouldLoadA);
 
     // D Register
     And(a=instruction[15], b=instruction[4], out=shouldLoadD);
